@@ -1,0 +1,12 @@
+steps:
+- name: 'gcr.io/cloud-builders/gcloud'
+  args: ['source', 'repos', 'clone', '$REPO_NAME']
+- name: 'gcr.io/cloud-builders/git'
+  args: ['fetch']
+- name: 'gcr.io/cloud-builders/git'
+  args: ['checkout', 'master']
+# Build Hugo site
+- name: gcr.io/$PROJECT_ID/hugo-extended
+# Upload it to GCS bucket
+- name: 'gcr.io/cloud-builders/gsutil'
+  args: ['-m', 'cp', '-r', 'public/.', 'gs://www.yoursite.xyz']

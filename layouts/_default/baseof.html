@@ -1,0 +1,47 @@
+<!DOCTYPE HTML>
+<html lang="en-US" class="no-js">
+	<head>
+		<title>{{ .Param "title" }} | MySite</title>
+		<meta charset="utf-8" />
+		<meta name="viewport" content="width=device-width, initial-scale=1" />
+		
+		<meta name="description" content="{{ .Param "description" }}"/>
+
+	  	<!-- Facebook and Twitter integration -->
+		<meta property="og:title" content="{{ .Param "title" }}"/>
+		<meta property="og:image" content=""/>
+		<meta property="og:url" content="{{ .Site.Params.baseURL }}"/>
+		<meta property="og:site_name" content="{{ .Site.Params.name }}"/>
+		<meta property="og:description" content="{{ .Param "description" }}"/>
+		<meta name="twitter:title" content="{{ .Param "title" }}" />
+		<meta name="twitter:image" content="" />
+		<meta name="twitter:url" content="{{ .Site.Params.baseURL }}" />
+		<meta name="twitter:card" content="" />
+
+		<link rel="shortcut icon" href="/favicon.ico">
+
+		<!-- Bootstrap  -->
+		{{ $bootstrap := resources.Get "sass/bootstrap.scss" | toCSS }}
+    <link rel="stylesheet" href="{{ $bootstrap.RelPermalink }}">
+    
+		<!-- Theme style -->
+		{{ $style := resources.Get "sass/style.scss" | toCSS }}
+		<link rel="stylesheet" href="{{ $style.RelPermalink }}">
+
+	</head>
+	<body>
+		<div id="page-wrapper">
+	
+      <div class="brand-wrapper">
+        <h1 id="brand-title"><a href="/">{{ .Site.Params.name }}</a></h1>
+        <p>{{ .Site.Params.tagline }}</p>
+      </div>
+	
+	
+			<div id="page-main">
+				{{ block "main" . }}{{ end }}
+			</div>
+		</div>
+
+	</body>
+</html>
